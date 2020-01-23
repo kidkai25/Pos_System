@@ -16,32 +16,15 @@ namespace Pos_System.Controllers
             {
                 using (var psdbcontext = new ProductsDbContext())
                 {
-                    //Creating a Sample Data to check ef
-                    Category c = new Category { CategoryId = 1, CategoryName = "First" };
-                    Sale s = new Sale
-                    {
-                        SaleId = 1,
-                        AnyDiscount = false,
-                        DateOfSale = DateTime.Now,
-                        EmployeeID = 1,
-                    };
+                    //Checking Data a Sample Data to check ef
+                    var c = psdbcontext.Category.Find(1);
+                    var s = psdbcontext.Sales.Find(1);
+                    var p = psdbcontext.Products.Find(1);
 
-                    psdbcontext.Category.Add(c);
-                    psdbcontext.Sales.Add(s);
-
-                    psdbcontext.SaveChanges();
-
-
-                    //Product product = new Product
-                    //{
-                    //    ProductId = 1,
-                    //    Name = "First Product",
-                    //    CategoryId = c.CategoryId,
-                    //    SalesId = s.SaleId
-                    //};
-
+               
                     ViewBag.Category = c.CategoryId;
                     ViewBag.Sales = s.SaleId;
+                    ViewBag.Product = p.ProductId;
 
 
                 }

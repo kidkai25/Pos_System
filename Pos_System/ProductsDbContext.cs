@@ -10,14 +10,10 @@ namespace Pos_System
     public class ProductsDbContext : DbContext
     {
 
-
         public ProductsDbContext() : base("name=POSDB")
         {
-
+            Database.SetInitializer<ProductsDbContext>(new PosInitializer());
         }
-
-
-
 
         public DbSet<Product> Products { get; set; }  
         public DbSet<Category> Category { get; set; }
