@@ -122,6 +122,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="PosInitializer.cs" />
+    <Compile Include="PosRepository.cs" />
     <Compile Include="ProductsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,24 +14,25 @@ namespace Pos_System.Controllers
         {
             try
             {
-                using (var psdbcontext = new ProductsDbContext())
-                {
-                    //Checking Data a Sample Data to check ef
-                    var c = psdbcontext.Category.Find(1);
-                    var s = psdbcontext.Sales.Find(1);
-                    var p = psdbcontext.Products.Find(1);
+                var posRepostiory = new PosRepository();
 
-               
+                //Checking Data a Sample Data to check ef
+                    var c = posRepostiory.GetCategory(1);
+                    var s = posRepostiory.GetSale(1);
+                    var p = posRepostiory.GetProduct(1);
+                    var p2 = posRepostiory.GetProduct(2);
+
                     ViewBag.Category = c.CategoryId;
                     ViewBag.Sales = s.SaleId;
                     ViewBag.Product = p.ProductId;
-
-
-                }
+                    ViewBag.Product2 = p2.ProductId;
+                
             }
+
+
             catch (Exception x)
             {
-                var d = 0;
+                throw x;
             }
             return View();
             

@@ -33,7 +33,16 @@ namespace Pos_System
                     SalesId = s.SaleId
                 };
 
-                psdbcontext.Products.Add(product);
+            Product product2 = new Product
+            {
+                ProductId = 2,
+                Name = "Second Product",
+                CategoryId = c.CategoryId,
+                SalesId = s.SaleId
+            };
+
+            psdbcontext.Products.Add(product);
+            psdbcontext.Products.Add(product2);
 
                 psdbcontext.SaveChanges();
 
