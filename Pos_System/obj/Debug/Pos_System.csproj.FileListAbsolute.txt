@@ -73,3 +73,12 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.csproj.CopyComplete
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.pdb
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Owin.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.xml
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.xml
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.Cookies.xml
