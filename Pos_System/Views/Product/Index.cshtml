@@ -13,8 +13,12 @@
 <div>
     <!--Going to add 2 partial View-->
 
-    @{ Html.RenderAction("LeftView", Model.SubViewModel1);}
-    @{ Html.RenderAction("RightView", Model.SubViewModel2);}
+    <div class="col-md-6">
+        @{ Html.RenderAction("LeftView", Model.SubViewModel1);}
+    </div>
+    <div class="col-md-6">
+        @{ Html.RenderAction("RightView", Model.SubViewModel2);}
+    </div>
 
 </div>
 

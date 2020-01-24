@@ -28,9 +28,15 @@ namespace Pos_System
             return pdb.Category.SingleOrDefault(c => c.CategoryId == id);
         }
 
+
+        public IEnumerable<Category> GetCategoryList()
+        {
+            return pdb.Category.ToList();
+        }
+
         public IEnumerable<Product> GetProductsList()
         {
-            return pdb.Products;
+            return pdb.Products.ToList();
         }
 
         public IQueryable<Product> MaxPriceProduct()

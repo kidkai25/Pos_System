@@ -17,11 +17,8 @@ namespace Pos_System.Controllers
 
             try
             {
-
-
-
                 var posRepostiory = new PosRepository();
-
+              
                 //Checking Data a Sample Data to check ef
                 var c = posRepostiory.GetCategory(1);
                 // var s = posRepostiory.GetSale(1);
@@ -57,7 +54,7 @@ namespace Pos_System.Controllers
 
         public ActionResult RightView(SubViewModel2 subViewModel2)
         {
-            return PartialView("_RightView");
+            return PartialView("_RightView", subViewModel2);
         }
     }
 }
