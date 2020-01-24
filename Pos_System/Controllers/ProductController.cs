@@ -1,4 +1,5 @@
 ﻿using Pos_System.Models;
+using Pos_System.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +13,26 @@ namespace Pos_System.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            BaseViewModel baseViewModel = new BaseViewModel();
+
             try
             {
+
+
+
                 var posRepostiory = new PosRepository();
 
                 //Checking Data a Sample Data to check ef
-                    var c = posRepostiory.GetCategory(1);
-                    var s = posRepostiory.GetSale(1);
-                    var p = posRepostiory.GetProduct(1);
-                    var p2 = posRepostiory.GetProduct(2);
+                var c = posRepostiory.GetCategory(1);
+                // var s = posRepostiory.GetSale(1);
+                var p = posRepostiory.GetProduct(1);
+                var p2 = posRepostiory.GetProduct(2);
 
-                    ViewBag.Category = c.CategoryId;
-                    ViewBag.Sales = s.SaleId;
-                    ViewBag.Product = p.ProductId;
-                    ViewBag.Product2 = p2.ProductId;
-                
+                ViewBag.Category = c.CategoryId;
+                //ViewBag.Sales = s.SaleId;
+                ViewBag.Product = p.ProductId;
+                ViewBag.Product2 = p2.ProductId;
+
             }
 
 
@@ -34,10 +40,24 @@ namespace Pos_System.Controllers
             {
                 throw x;
             }
-            return View();
-            
 
-            
+
+            //Add ViewModel
+            return View(baseViewModel);
+
+
+
+        }
+
+
+        public ActionResult LeftView(SubViewModel1 subViewModel1)
+        {
+            return PartialView("_LeftView");
+        }
+
+        public ActionResult RightView(SubViewModel2 subViewModel2)
+        {
+            return PartialView("_RightView");
         }
     }
 }

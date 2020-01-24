@@ -1,4 +1,4 @@
-﻿
+﻿@model Pos_System.ViewModel.BaseViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -9,4 +9,15 @@
 @ViewBag.Category
 @ViewBag.Product
 @ViewBag.Product2
+
+<div>
+    <!--Going to add 2 partial View-->
+
+    @{ Html.RenderAction("LeftView", Model.SubViewModel1);}
+    @{ Html.RenderAction("RightView", Model.SubViewModel2);}
+
+</div>
+
+
+
 

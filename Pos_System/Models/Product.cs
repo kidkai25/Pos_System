@@ -32,7 +32,7 @@ namespace Pos_System.Models
         //Sales
         //Fk
         [ForeignKey("Sale")]
-        public int SalesId { get; set; }
+        public int? SalesId { get; set; } //Nullable 
         //Navigation property for Sale
         public Sale Sale { get; set; }
 

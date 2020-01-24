@@ -11,38 +11,50 @@ namespace Pos_System
     {
         protected override void Seed(ProductsDbContext psdbcontext)
         {
-                //Moving Sample Data here          
-              
-                Category c = new Category { CategoryId = 1, CategoryName = "First" };
-                Sale s = new Sale
-                {
-                    SaleId = 1,
-                    AnyDiscount = false,
-                    DateOfSale = DateTime.Now,
-                    EmployeeID = 1,
-                };
+            //Moving Sample Data here 
 
-                psdbcontext.Category.Add(c);
-                psdbcontext.Sales.Add(s);
+            //Creating a list of categories
+
+            IList<Category> categories = new List<Category> {
+                                            new Category {CategoryId =1, CategoryName = "Computers" },
+                                            new Category { CategoryId = 2, CategoryName = "Fruits" },
+                                            new Category { CategoryId = 3, CategoryName = "Services" },
+                                            new Category { CategoryId = 4, CategoryName = "Burger" },
+                                            new Category { CategoryId =5, CategoryName = "Pizza" }
+                                        };
+
+
+
+            //For Later
+            //Sale s = new Sale
+            //{
+            //    SaleId = 1,
+            //    AnyDiscount = false,
+            //    DateOfSale = DateTime.Now,
+            //    EmployeeID = 1,
+            //};
+
+                psdbcontext.Category.AddRange(categories);
+                //psdbcontext.Sales.Add(s);
 
                 Product product = new Product
                 {
                     ProductId = 1,
                     Name = "First Product",
-                    CategoryId = c.CategoryId,
-                    SalesId = s.SaleId
+                    CategoryId = categories.First().CategoryId,
+                    //SalesId = s.SaleId
                 };
 
-            Product product2 = new Product
-            {
-                ProductId = 2,
-                Name = "Second Product",
-                CategoryId = c.CategoryId,
-                SalesId = s.SaleId
-            };
+                Product product2 = new Product
+                {
+                    ProductId = 2,
+                    Name = "Second Product",
+                    CategoryId = categories.Skip(1).First().CategoryId,
+                    //SalesId = s.SaleId
+                };
 
-            psdbcontext.Products.Add(product);
-            psdbcontext.Products.Add(product2);
+                psdbcontext.Products.Add(product);
+                psdbcontext.Products.Add(product2);
 
                 psdbcontext.SaveChanges();
 

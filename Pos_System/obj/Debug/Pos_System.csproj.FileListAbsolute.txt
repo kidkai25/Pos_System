@@ -50,6 +50,8 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\roslyn\vbc.exe.c
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\roslyn\vbc.rsp
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\roslyn\VBCSCompiler.exe
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.SqlServer.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Helpers.dll
@@ -58,6 +60,8 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Razor
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpages.Deployment.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpages.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpages.Razor.dll
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.xml
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.SqlServer.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Razor.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpages.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpages.Deployment.xml
@@ -69,7 +73,3 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.csproj.CopyComplete
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.pdb
-C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.dll
-C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.SqlServer.dll
-C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.xml
-C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\EntityFramework.SqlServer.xml
