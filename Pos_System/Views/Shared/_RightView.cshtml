@@ -2,19 +2,57 @@
 
 <h1>Right View</h1>
 
-@foreach (var x in Model.Categories)
-{
-    <p>@x.CategoryName</p>
-}
+<div id="catList">
+    @foreach (var x in Model.Categories)
+    {
+        @*@Html.ActionLink(x.CategoryName, "RightViewProducts");*@
+
+        @Html.ActionLink(x.CategoryName, null, null, new { id = x.CategoryId, href = "#" });
+
+    }
+</div>
 
 
 <div class="col-md-12">
-    <input class="col-md-10" type="text"/>
+    <input class="col-md-10" type="text" />
     <button id="b1" type="submit" value="Search"> Search </button>
 </div>
 
-<!--Partial View for Products-->
-@*@{Html.RenderAction("RightViewProducts", Model.Products)}*@
+
+<div id="productList">
+    @{Html.RenderPartial("_RightViewProducts", Model.Products);}
+</div>
+
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            alert("Hello");
+            var x = '<a href="#"' + 'id = 0>All';
+            $('#catList ').prepend(x);
+            
+            $('#catList a').on("click", (function () {
+                
+
+                var categoryId = $(this).attr('id');
+                $.ajax({
+                    url: "Product/RightViewProducts",
+                    dataType: "html",
+                    data: { CategoryId: categoryId },
+                    success: function (result) {
+                        
+                        $("#productList").html(result);
+                    }
+                })
+
+            }));
+
+
+        })
+    </script>
+
 
 
 

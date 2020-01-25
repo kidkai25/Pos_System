@@ -19,10 +19,13 @@ namespace Pos_System.ViewModel
             this.Categories = pr.GetCategoryList();
             this.Products = pr.GetProductsList();
 
-        }
-        public IEnumerable<Category> Categories { get; }
 
-        public IEnumerable<Product> Products { get; }
+            
+
+        }
+        public IEnumerable<Category> Categories { get; set; }
+
+        public IEnumerable<Product> Products { get; set; }
 
         //Creating Products
     }

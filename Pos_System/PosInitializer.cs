@@ -16,6 +16,7 @@ namespace Pos_System
             //Creating a list of categories
 
             IList<Category> categories = new List<Category> {
+                                           
                                             new Category {CategoryId =1, CategoryName = "Computers" },
                                             new Category { CategoryId = 2, CategoryName = "Fruits" },
                                             new Category { CategoryId = 3, CategoryName = "Services" },
@@ -41,7 +42,7 @@ namespace Pos_System
                 {
                     ProductId = 1,
                     Name = "First Product",
-                    CategoryId = categories.First().CategoryId,
+                    CategoryId = categories[0].CategoryId,
                     //SalesId = s.SaleId
                 };
 
@@ -49,7 +50,7 @@ namespace Pos_System
                 {
                     ProductId = 2,
                     Name = "Second Product",
-                    CategoryId = categories.Skip(1).First().CategoryId,
+                    CategoryId = categories[1].CategoryId,
                     //SalesId = s.SaleId
                 };
 

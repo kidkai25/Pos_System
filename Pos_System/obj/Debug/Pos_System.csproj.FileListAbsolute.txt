@@ -69,7 +69,6 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Webpa
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Helpers.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\System.Web.Mvc.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.csprojAssemblyReference.cache
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.csproj.CopyComplete
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.dll
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.pdb
@@ -82,3 +81,4 @@ C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.x
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.xml
 C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\shad\source\repos\New folder\Pos_System\Pos_System\obj\Debug\Pos_System.csprojAssemblyReference.cache

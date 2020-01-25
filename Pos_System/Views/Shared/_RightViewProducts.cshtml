@@ -4,9 +4,9 @@
 <p>Products</p>
 
 
-@*@foreach(var item in Model)
-{
-    <ul>
-        <li>@Html.DisplayFor(x  => x)</li>
-    </ul>
-}*@
+@foreach(var item in Model)
+    {
+        <ul>
+            <li>@Html.DisplayFor(x  => item.Name)</li>
+        </ul>
+    }

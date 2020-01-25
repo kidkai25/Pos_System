@@ -54,14 +54,25 @@ namespace Pos_System.Controllers
 
         public ActionResult RightView(SubViewModel2 subViewModel2)
         {
+
             return PartialView("_RightView", subViewModel2);
         }
 
-        //public ActionResult RightViewProducts(IEnumerable<Product> products)
-        //{
-        //    //Check for Category Selected
+        public ActionResult RightViewProducts(int? CategoryId)
+        {
+            var posRepostiory = new PosRepository();
 
-        //    return PartialView("_RightViewProducts", products);
-        //}
+            //Get Entire Products list
+            var products = posRepostiory.GetProductsList();
+
+            //Check for Category Selected
+            if (CategoryId.HasValue && CategoryId != 0)
+            {
+                products = products.Where(p => p.CategoryId == CategoryId);
+            }
+
+            return PartialView("_RightViewProducts", products);
+        }
+
     }
 }
