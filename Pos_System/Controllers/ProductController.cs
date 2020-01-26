@@ -58,7 +58,7 @@ namespace Pos_System.Controllers
             return PartialView("_RightView", subViewModel2);
         }
 
-        public ActionResult RightViewProducts(int? CategoryId)
+        public ActionResult RightViewProducts(int? CategoryId, string Product = "")
         {
             var posRepostiory = new PosRepository();
 
@@ -68,8 +68,15 @@ namespace Pos_System.Controllers
             //Check for Category Selected
             if (CategoryId.HasValue && CategoryId != 0)
             {
-                products = products.Where(p => p.CategoryId == CategoryId);
+
+                products = products.Where(p => p.CategoryId == CategoryId &&
+                                p.Name.StartsWith(Product));
+
             }
+            else
+                products = products.Where(x => x.Name.StartsWith(Product));
+
+
 
             return PartialView("_RightViewProducts", products);
         }

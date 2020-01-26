@@ -14,8 +14,8 @@
 
 
 <div class="col-md-12">
-    <input class="col-md-10" type="text" />
-    <button id="b1" type="submit" value="Search"> Search </button>
+    <input class="col-md-10" type="text" id="searchBox"/>
+    @*<button id="b1" type="submit" value="Search"> Search </button>*@
 </div>
 
 
@@ -33,9 +33,7 @@
             var x = '<a href="#"' + 'id = 0>All';
             $('#catList ').prepend(x);
             
-            $('#catList a').on("click", (function () {
-                
-
+            $('#catList a').on("click", (function () {               
                 var categoryId = $(this).attr('id');
                 $.ajax({
                     url: "Product/RightViewProducts",
@@ -48,6 +46,25 @@
                 })
 
             }));
+
+
+            $('#searchBox').on("keyup", function () {
+                var x = $(this).val();
+                console.log(x);
+                var productEntered = $(this).val();
+                $.ajax({
+                    url: "Product/RightViewProducts",
+                    dataType: "html",
+                    data: { Product: productEntered },
+                    success: function (result) {
+                        
+                        $("#productList").html(result);
+                    }
+                })
+            });
+
+
+
 
 
         })
