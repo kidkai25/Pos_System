@@ -49,6 +49,7 @@ namespace Pos_System.Controllers
 
         public ActionResult LeftView(SubViewModel1 subViewModel1)
         {
+
             return PartialView("_LeftView");
         }
 

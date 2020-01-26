@@ -67,3 +67,12 @@ textarea {
             flex-wrap: wrap;
         }
 
+        .btnContainer
+        {
+            justify-content:space-evenly;
+            
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+

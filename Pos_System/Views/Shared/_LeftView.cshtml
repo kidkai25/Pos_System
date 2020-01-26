@@ -1,2 +1,62 @@
 ﻿
 <h1>Left View</h1>
+
+<table style="width:100%">
+    <tr>
+        <th>Products</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+
+</table>
+<!--Going to render another partialView that will be catching drag-drop event-->
+@{Html.RenderPartial("_LeftViewData"); }
+
+
+<div id="SummaryTable">
+
+    <table style="width:100%">
+        <tr>
+            <td>
+                Subtotal
+            </td>
+            <td>
+                #Subtotal
+            </td>
+        </tr>
+        <tr>
+            <td>
+                VAT Tax
+            </td>
+            <td>
+                #N/A
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Discount
+            </td>
+            <td>
+                #N/A
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total
+            </td>
+            <td>
+                2000
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="btnContainer">
+    <button>Cancel Sale</button>
+    <button>Process Sale</button>
+</div>
+
+
+
