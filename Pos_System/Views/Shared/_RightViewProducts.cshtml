@@ -9,7 +9,7 @@
     {
 
         <!--Going to use FlexBox-->
-        <div class="fbox @item.ProductId">
+        <div class="fbox @item.ProductId" draggable="true">
             <div class="imgBox">
                 <img src="~/Content/Images/computer.jpg" />
 
@@ -34,12 +34,18 @@
        
 
         $(".fbox").on("mouseover", function () {
-            //debugger;
-            //alert("Called");
-
             $(this).find(".howerInfo").show();
 
         });
+
+        //Draggable
+        $(".fbox").on("dragstart", function (e) {
+
+            e.dataTransfer = e.originalEvent.dataTransfer;
+            e.dataTransfer.setData("text","Data Recieved");
+        });
+
+
 
     })
 </script>

@@ -12,8 +12,9 @@
 
 </table>
 <!--Going to render another partialView that will be catching drag-drop event-->
-@{Html.RenderPartial("_LeftViewData"); }
-
+<div id="leftViewData" >
+    @{Html.RenderPartial("_LeftViewData"); }
+</div>
 
 <div id="SummaryTable">
 
@@ -58,5 +59,29 @@
     <button>Process Sale</button>
 </div>
 
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        $("#leftViewData").on("drop", function (e) {
+            e.preventDefault();
+            alert("drop recieved");
+            e.dataTransfer = e.originalEvent.dataTransfer;
+            var data = e.dataTransfer.getData("text");
+
+            $("#leftViewData").html(data);
+            
+        });
+        $("#leftViewData").on("dragover", function (e) {
+            e.preventDefault();           
+        });
+       
+    })
+
+
+</script>
 
 
