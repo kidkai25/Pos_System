@@ -4,9 +4,42 @@
 <p>Products</p>
 
 
-@foreach(var item in Model)
+<div id="pcontainer">
+    @foreach (var item in Model)
     {
-        <ul>
-            <li>@Html.DisplayFor(x  => item.Name)</li>
-        </ul>
+
+        <!--Going to use FlexBox-->
+        <div class="fbox @item.ProductId">
+            <div class="imgBox">
+                <img src="~/Content/Images/computer.jpg" />
+
+            </div>
+            <div class="ProductItem">
+                @Html.DisplayFor(x => item.Name)
+            </div>
+            <div id="hover_@item.ProductId" class="ProductItem howerInfo" style="display:none">
+                @Html.DisplayFor(x => item.UnitPrice)
+            </div>
+        </div>
     }
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+      
+       
+
+        $(".fbox").on("mouseover", function () {
+            //debugger;
+            //alert("Called");
+
+            $(this).find(".howerInfo").show();
+
+        });
+
+    })
+</script>

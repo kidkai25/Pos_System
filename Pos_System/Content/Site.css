@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -15,4 +16,54 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.fbox {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 2px;
+    opacity: 0.5;
+    position:relative;
+    /*background-image: url(Images/computer.jpg);*/
+    /*max-width: 100%;
+    background-size: 100% 100%;*/
+}
+    .fbox .imgBox {
+        position: relative;
+    }
+
+    .fbox .imgBox img {
+       
+        max-width: 100%;
+        /*background-size: 100% 100%;*/
+    }
+
+    .fbox .ProductItem
+    {
+        position:absolute;
+      top: 10px;
+       
+        left:10px;
+        bottom:50px;
+        right:10px;
+        background: rgba(0,0,0,0);
+    }
+
+.ProductItem.howerInfo {
+    position: absolute;
+    /*background-color: green;*/
+   top:50px;
+}
+
+
+
+        #pcontainer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
 

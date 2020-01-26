@@ -43,19 +43,63 @@ namespace Pos_System
                     ProductId = 1,
                     Name = "First Product",
                     CategoryId = categories[0].CategoryId,
+                    UnitPrice = 500
                     //SalesId = s.SaleId
                 };
 
-                Product product2 = new Product
-                {
-                    ProductId = 2,
-                    Name = "Second Product",
-                    CategoryId = categories[1].CategoryId,
+            Product product2 = new Product
+            {
+                ProductId = 2,
+                Name = "Second Product",
+                CategoryId = categories[1].CategoryId,
+                UnitPrice = 10000
                     //SalesId = s.SaleId
                 };
 
-                psdbcontext.Products.Add(product);
+
+        Product product3 = new Product
+        {
+            ProductId = 3,
+            Name = "Third Product",
+            CategoryId = categories[1].CategoryId,
+            UnitPrice = 200000
+                //SalesId = s.SaleId
+            };
+
+            Product product4 = new Product
+            {
+                ProductId = 4,
+                Name = "Fourth Product",
+                CategoryId = categories[1].CategoryId,
+                UnitPrice = 300
+                //SalesId = s.SaleId
+            };
+
+            Product product5 = new Product
+            {
+                ProductId = 5,
+                Name = "Fifth Product",
+                CategoryId = categories[1].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 600
+            };
+
+            Product product6 = new Product
+            {
+                ProductId = 6,
+                Name = "Sixth Product",
+                CategoryId = categories[1].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 3300
+            };
+
+
+            psdbcontext.Products.Add(product);
                 psdbcontext.Products.Add(product2);
+            psdbcontext.Products.Add(product3);
+            psdbcontext.Products.Add(product4);
+            psdbcontext.Products.Add(product5);
+            psdbcontext.Products.Add(product6);
 
                 psdbcontext.SaveChanges();
 

@@ -40,7 +40,7 @@
                     dataType: "html",
                     data: { CategoryId: categoryId },
                     success: function (result) {
-                        
+                       
                         $("#productList").html(result);
                     }
                 })
@@ -57,6 +57,7 @@
                     dataType: "html",
                     data: { Product: productEntered },
                     success: function (result) {
+                        debugger;
                         
                         $("#productList").html(result);
                     }
