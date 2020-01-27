@@ -101,6 +101,30 @@ namespace Pos_System
             psdbcontext.Products.Add(product5);
             psdbcontext.Products.Add(product6);
 
+
+
+            ////CREATING A SAMPLE SALE//
+            //Sale s = new Sale
+            //{
+            //    SaleId = 1,
+            //    DateOfSale = DateTime.Now,
+            //    AnyDiscount = true,
+            //    EmployeeID = 1,
+            //    InvoiceTotal = 1000,
+            //    VatApplied = 10,
+            //    Products = new List<Product>()
+            //    {
+            //        product,
+            //        product2,
+            //        product3,
+            //        product4,
+            //    }
+
+            //};
+
+            //psdbcontext.Sales.Add(s);
+
+
                 psdbcontext.SaveChanges();
 
 

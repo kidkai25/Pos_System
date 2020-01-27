@@ -28,6 +28,9 @@ namespace Pos_System.Models
         public Category Category { get; set; }
         //
 
+        [NotMapped]
+        public int currentQuantity { get; set; }
+
 
         //Sales
         //Fk

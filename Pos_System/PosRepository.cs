@@ -53,9 +53,25 @@ namespace Pos_System
         }
 
 
+        public void AddSale(Sale s)
+        {
+            pdb.Sales.Add(s);
+        }
+        public int GetLastSaleID()
+        {
+            return pdb.Sales.OrderByDescending(x => x.SaleId)
+                            .Select(x => x.SaleId)                        
+                            .FirstOrDefault();
+        }
+
         public void Save()
         {
             pdb.SaveChanges();
+        }
+
+        public void AttachProduct(Product p)
+        {
+            pdb.Products.Attach(p);
         }
         
     }

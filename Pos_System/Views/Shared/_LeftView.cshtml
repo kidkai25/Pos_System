@@ -1,19 +1,23 @@
 ﻿
 <h1>Left View</h1>
+<div id="leftViewData">
+    <table id="leftViewExistingData" style="width:100%">
+        <tr>
+            <th>Products</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
 
-<table style="width:100%">
-    <tr>
-        <th>Products</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-    </tr>
 
+        <!--Going to render another partialView that will be catching drag-drop event-->
+        @*<tr id="leftViewData" style="display:none">
 
-</table>
-<!--Going to render another partialView that will be catching drag-drop event-->
-<div id="leftViewData" >
-    @{Html.RenderPartial("_LeftViewData"); }
+            @*</tr>*@
+    </table>
+    <div id="leftViewDefaultData">
+        <h1>No data to Display</h1>
+    </div>
 </div>
 
 <div id="SummaryTable">
@@ -24,39 +28,43 @@
                 Subtotal
             </td>
             <td>
-                #Subtotal
+                <span id="fsubTotal">
+
+                </span>
+                
             </td>
         </tr>
         <tr>
             <td>
                 VAT Tax
             </td>
-            <td>
-                #N/A
+            <td id="vatVal">
+                <input  class="calFinal" id="vatValInput" type="text" value="#N/A">                             
             </td>
         </tr>
         <tr>
             <td>
                 Discount
             </td>
-            <td>
-                #N/A
+            <td id="discountVal">
+                <input class="calFinal" id="discountValInput" type="text" value="0">
+               %
             </td>
         </tr>
         <tr>
-            <td>
+            <td >
                 Total
             </td>
-            <td>
-                2000
+            <td id="finalTotal">
+               
             </td>
         </tr>
     </table>
 </div>
 
 <div class="btnContainer">
-    <button>Cancel Sale</button>
-    <button>Process Sale</button>
+    <button id="cancelSale">Cancel Sale</button>
+    <button id="processSale">Process Sale</button>
 </div>
 
 
@@ -66,18 +74,389 @@
 
 
     $(document).ready(function () {
+
+
+        $(document).on('click', '.xx', function () {
+            $(this).closest("tr").remove();
+            //alert('Clicked');
+        });
+        $(document).on('click', '.plus', function () {
+            debugger;
+            var spanSibling = $(this).siblings("span");
+            var result = parseInt(spanSibling.text()) + 1;
+            spanSibling.text(result);
+            //alert('Clicked');
+
+            //CALL UPDATE
+
+            updateTotal($(this).closest("tr"));
+            updatefsubTotal();
+        });
+
+        $(document).on('click', '.minus', function () {
+
+            var spanSibling = $(this).siblings("span");
+
+
+            if (parseInt(spanSibling.text()) > 0){ 
+                var result = parseInt(spanSibling.text()) - 1;
+          
+                if (result == 0) {
+                  
+                    alert("Please select atleast one Product");
+                }
+                else
+                spanSibling.text(result);
+            }
+
+            //CALL UPDATE
+            updateTotal($(this).closest("tr"));
+            updatefsubTotal();
+            //alert('Clicked');
+        });
+
+
+        
+
+
         $("#leftViewData").on("drop", function (e) {
             e.preventDefault();
             alert("drop recieved");
             e.dataTransfer = e.originalEvent.dataTransfer;
             var data = e.dataTransfer.getData("text");
+            addProduct(data);
 
-            $("#leftViewData").html(data);
+            //$("#leftViewDefaultData").html(data);
             
         });
         $("#leftViewData").on("dragover", function (e) {
             e.preventDefault();           
         });
+
+        function addProduct(product) {
+
+            //Check existing data
+            var x = getExistingData(product);
+            console.log(x);
+            if (!x)
+                createNewProductRow(product);
+            else
+                updateExistingProductRow(product);
+
+
+            updatefsubTotal();
+            //Manipulate
+
+        }
+
+        function getExistingData(product) {
+            debugger;
+
+            var existing = $("#leftViewExistingData tr").not(':first').length > 0;
+
+            if (!existing) {
+                //$("#leftViewData").html("<h1>No data to Display</h1>");
+                
+                $("leftViewDefaultData").show();
+                return false;
+            }
+
+            else {
+                $("#leftViewDefaultData").hide();
+                var productExists = false;
+                var currentProduct = JSON.parse(product);
+
+                //get first tds
+                var arr = [];
+                $("#leftViewExistingData tr").not(':first').each(function () {
+                    arr.push($(this).find("#productNameVal_" + currentProduct.productId).text());
+                });
+
+                if (arr.length >= 1) {
+                    //Check
+                    debugger;
+                    var productName = currentProduct.productName;
+
+                    for (var i = 0; i < arr.length; i++) {
+                        let name = arr[i];
+                        if (name == productName) {
+                            productExists = true;
+                            break;
+                        }
+
+                    }
+
+                    return productExists;
+                }
+                else
+                    return productExists
+
+               
+            }
+
+
+        }
+
+        function createNewProductRow(product) {
+            var newProduct = JSON.parse(product);
+            debugger;
+            //Extract data
+            var productId = newProduct.productId;
+            var productName = newProduct.productName;
+            var productPrice = newProduct.productPrice;
+
+           
+
+            //New Row
+            $("#leftViewExistingData tr:last").after(
+                "<tr id=productRow_" + productId + " class=cartProduct><td id=productName_" + productId +
+                ">" + "<button class=xx id = cross_" + productId + "> Cross </button><span id=productNameVal_" + productId + ">" + productName + "</span></td><td id=productPrice_" + productId + ">" + productPrice +
+                "</td><td id=productQuantity_" + productId +
+                "><button class=plus id=plus_" + productId + ">plus</button><span id=qNumber_" + productId + ">1</span><button class=minus id=minus_" + productId + ">minus</button</td><td class=subTotal id= productTotalPrice_" + productId + ">" + productPrice + "</td></tr>"
+            )
+
+            $("#leftViewExistingData").show();
+            $("#leftViewDefaultData").hide();
+        }
+
+        function updateExistingProductRow(product) {
+
+            //parse back to JSON object
+            var newProduct = JSON.parse(product);
+            debugger;
+            //Extract data
+            var productId = newProduct.productId;
+            var productName = newProduct.productName;
+            var productPrice = newProduct.productPrice;
+
+            //Increase the Total and quantity only
+            var currentRow = $("#productRow_" + productId);
+
+
+            var currentQuantity = currentRow.find("#qNumber_" + productId).text();
+            result = parseInt(currentQuantity) + 1;
+            currentRow.find("#qNumber_" + productId).text(result);
+
+            var currentRowTotal = currentRow.find("#productTotalPrice_" + productId).text();
+            var result = parseInt(currentRowTotal) + parseInt(productPrice);
+            currentRow.find("#productTotalPrice_" + productId).text(result);
+
+       
+          
+        }
+
+
+        function updateTotal(e)
+        {      
+            var pid = e.attr("id").split('_')[1];
+            console.log(pid);
+            var totalElement = $(e).find("#productTotalPrice_" + pid);
+            var unitPrice = $(e).find("#productPrice_" + pid).text();
+            var quantity = $(e).find("#productQuantity_" + pid + " span").text();
+            var updatedTotalPrice = parseInt(unitPrice) * parseInt(quantity);
+            totalElement.text(updatedTotalPrice);
+
+           
+
+        }
+
+
+
+        //#summary table functions//
+
+        $(document).on('click', '#processSale', function () {
+            debugger;
+            var vatVal = $("#vatValInput").val();
+
+            if (isNaN(vatVal))
+                alert("Please Enter Vat value");
+            else {
+
+                //Final Submission
+
+                //My Object
+                //
+
+             var obj =   {
+                        //"$id": "1",
+                        "Products": [
+                            {
+                                "$id": "2",
+                                "ProductId": 3,
+                                "Name": "First Product",
+                                "UnitPrice": 500,
+                                "AvailableQuantity": null,
+                                "Image": null,
+                                "CategoryId": 1,
+                                "Category": null,
+                                
+                            },
+                            {
+                                "$id": "3",
+                                "ProductId": 4,
+                                "Name": "Second Product",
+                                "UnitPrice": 10000,
+                                "AvailableQuantity": null,
+                                "Image": null,
+                                "CategoryId": 2,
+                                "Category": null,
+                               
+                            },
+                            {
+                                "$id": "4",
+                                "ProductId": 5,
+                                "Name": "Third Product",
+                                "UnitPrice": 200000,
+                                "AvailableQuantity": null,
+                                "Image": null,
+                                "CategoryId": 2,
+                                "Category": null,
+                                
+                            },
+                            {
+                                "$id": "5",
+                                "ProductId": 6,
+                                "Name": "Fourth Product",
+                                "UnitPrice": 300,
+                                "AvailableQuantity": null,
+                                "Image": null,
+                                "CategoryId": 2,
+                                "Category": null,
+                               
+                            }
+                        ],
+                          
+                                "EmployeeID": 1,
+                                    "DateOfSale": "2020-01-27T17:31:41.927",
+                                        "AnyDiscount": true,
+                                            "VatApplied": 10.00,
+                                                "InvoiceTotal": 1000.00
+                }
+
+
+                //ExtractData Data//
+
+                const saleObj = {
+                    "AnyDiscount": null,
+                    "VatApplied": null,
+                    "InvoiceTotal": null,
+                    "DateOfSale": null,
+                    "Products": []
+                };
+
+                const product = {
+
+                };
+
+                debugger;
+
+                //Putting Values
+                saleObj.AnyDiscount = ($("#discountValInput").val() != 0) ? true : false;
+                saleObj.VatApplied = $("#vatValInput").val();
+                saleObj.InvoiceTotal = $("#finalTotal").text();
+                saleObj.DateOfSale = new Date();
+
+
+                //Function to get All Products added to cart
+
+
+                $(".cartProduct").each((i,e) => {
+
+                    var product = {};
+                    debugger;
+                    product.ProductId = $(e).attr("id").split('_')[1];
+                    product.Name = $(e).find("#productName_" + product.ProductId + " span").text();
+                    product.currentQuantity = $(e).find("#productQuantity_" + product.ProductId + " span").text();
+
+                    saleObj.Products.push(product);
+                });
+
+                
+
+
+
+
+
+
+
+
+
+                ////////////////////////////
+                //var jObject = {
+                //    "EmployeeID": 1,
+                //    "DateOfSale": '2011-04-02 17:15:45',
+                //    "AnyDiscount": true,
+                //}
+
+
+                
+                    $.ajax({
+                        url: "Product/ReceiveSale",
+                        type:"POST",
+                        dataType: "json",
+                        data: JSON.stringify({ 'sale': saleObj }), 
+                        contentType: "application/json; charset=utf-8",
+                        success: function (result) {                      
+                            alert("SUCCESS");
+
+                            $('#ModalPopUp').modal('show');
+                        },
+
+                        error: function (res) {
+                            alert("FAILED");
+                            $('#ModalPopUp').modal('show');
+                        }
+                    })
+               
+
+
+
+
+
+            }
+            //alert('Clicked');
+        });
+
+
+
+        function updatefsubTotal() {
+            var cur = 0;
+            $(".subTotal").each(function (i, e) {
+
+                debugger;
+                console.log($(e));
+                cur += parseInt($(e).text());
+                //
+            });
+
+            debugger;
+            $("#fsubTotal").text(cur);
+
+
+            $("#finalTotal").text(calTotal())
+        }
+
+
+
+        function calTotal() {
+            //Get discount,subtotal and vat
+            debugger;
+            var discount = parseInt($("#discountValInput").val());
+            var currentVat = $("#vatValInput").val();
+            var vat = isNaN(currentVat) ? 0 : parseInt(currentVat);
+            var subTotal = parseInt($("#fsubTotal").text());
+
+            var finalTotal = subTotal + vat - ((subTotal / 100) * discount);
+
+            return finalTotal;
+        }
+
+        $(document).on("change", ".calFinal", function () {
+            debugger;
+            $("#finalTotal").text(calTotal())
+          
+        })
+      
        
     })
 

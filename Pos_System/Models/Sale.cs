@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,10 @@ namespace Pos_System.Models
     //One sale can have many products
     public class Sale
     {
+        public Sale()
+        {
+            Products = new List<Product>();
+        }
         public int SaleId { get; set; }
 
         public int EmployeeID { get; set;}
@@ -22,9 +27,12 @@ namespace Pos_System.Models
 
         public decimal? InvoiceTotal { get; set; }
 
+        public string invoiceNumber { get; set; }
 
+
+        //[JsonIgnore]
         //Many Products
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
 
     }

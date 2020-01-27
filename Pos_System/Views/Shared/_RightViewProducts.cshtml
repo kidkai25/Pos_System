@@ -10,11 +10,12 @@
 
         <!--Going to use FlexBox-->
         <div class="fbox @item.ProductId" draggable="true">
+            <input type="hidden" value="@item.ProductId" />
             <div class="imgBox">
                 <img src="~/Content/Images/computer.jpg" />
 
             </div>
-            <div class="ProductItem">
+            <div id="ProductItem_@item.ProductId" class="ProductItem" >
                 @Html.DisplayFor(x => item.Name)
             </div>
             <div id="hover_@item.ProductId" class="ProductItem howerInfo" style="display:none">
@@ -40,9 +41,17 @@
 
         //Draggable
         $(".fbox").on("dragstart", function (e) {
+            //e.preventDefault();
+            var productId = $(this).find("input[type=hidden]").val();
+            var productName = $(this).find("#ProductItem_" + productId)[0].innerText;
+            var productPrice = $(this).find("#hover_" + productId)[0].innerText;
+
+            //debugger;
+
+            let obj = { productId: productId, productName: productName, productPrice: productPrice };
 
             e.dataTransfer = e.originalEvent.dataTransfer;
-            e.dataTransfer.setData("text","Data Recieved");
+            e.dataTransfer.setData("text/plain", JSON.stringify(obj));
         });
 
 
