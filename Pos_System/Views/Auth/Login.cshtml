@@ -1,0 +1,26 @@
+﻿@model Pos_System.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@Html.ValidationSummary(true)
+
+@using (Html.BeginForm())
+{
+	@Html.EditorForModel()
+	<p>
+		<button type="submit">Log In</button>
+	</p>
+}
+
+<h6>username:- admin</h6>
+<h6>password:- 123456</h6>
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+﻿@model Pos_System.ViewModel.SubViewModel2
+
+
+<div id="catList">
+    @foreach (var x in Model.Categories)
+    {
+        @*@Html.ActionLink(x.CategoryName, "RightViewProducts");*@
+
+        @Html.ActionLink(x.CategoryName, null, null, new { id = x.CategoryId, href = "#" });
+
+    }
+</div>
+
+
+<div class="col-md-12">
+    <input class="col-md-10" type="text" id="searchBox" placeholder="Search an item..."/><span class="glyphicon glyphicon-search"></span>
+    @*<button id="b1" type="submit" value="Search"> Search </button>*@
+</div>
+
+
+<div id="productList">
+    @{Html.RenderPartial("_RightViewProducts", Model.Products);}
+</div>
+
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            
+            var x = '<a href="#"' + 'id = 0>All';
+            $('#catList ').prepend(x);
+            
+            $('#catList a').on("click", (function () {               
+                var categoryId = $(this).attr('id');
+                $.ajax({
+                    url: "Product/RightViewProducts",
+                    dataType: "html",
+                    data: { CategoryId: categoryId },
+                    success: function (result) {
+                       
+                        $("#productList").html(result);
+                    }
+                })
+
+            }));
+
+
+            $('#searchBox').on("keyup", function () {
+                var x = $(this).val();
+                console.log(x);
+                var productEntered = $(this).val();
+                $.ajax({
+                    url: "Product/RightViewProducts",
+                    dataType: "html",
+                    data: { Product: productEntered },
+                    success: function (result) {                       
+                        $("#productList").html(result);
+                    }
+                })
+            });
+
+
+
+
+
+        })
+    </script>
+
+
+
+
+
+
+

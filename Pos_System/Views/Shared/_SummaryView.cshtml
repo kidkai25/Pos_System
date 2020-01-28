@@ -1,0 +1,133 @@
+﻿@model Pos_System.Models.Sale
+
+
+<div class="modal fade" id="ModalPopUp" role="dialog">
+    <div class="modal-dialog err-pop" style="">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <h2 style="text-align:center">Sale No: @Model.invoiceNumber</h2>
+
+                <div>Date:- @Model.DateOfSale</div>
+
+                <table width="100%">
+                    <tr>
+                        <th>#</th>
+                        <th>products</th>
+                        <th>Quantity</th>
+                        <th>SubTotal</th>
+                    </tr>
+
+                    @{var rowCounter = 0;
+                        var totalCount = 0;
+                        var totalVal = 0;
+
+                    }
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                @{++rowCounter;}
+                                @rowCounter
+                            </td>
+                            <td>
+                                @product.Name
+                            </td>
+                            <td id="summaryQuantity_" + @product.ProductId>
+                                @ViewData["currentQuantity_" + product.ProductId]
+                            </td>
+                            <td>
+                                @{
+                                    var result = (int)ViewData["currentQuantity_" + product.ProductId] * product.UnitPrice;
+                                }
+                                @result
+                            </td>
+
+                            @{
+                                totalCount += (int)ViewData["currentQuantity_" + product.ProductId];
+                                totalVal += (int)result;
+                            }
+
+                        </tr>
+                    }
+
+
+                </table>
+                <hr>
+                <div>
+                    <label>
+                        Total items
+                    </label>
+                    <label>
+                        @totalCount
+                    </label>
+                    <label>
+                        Total
+                    </label>
+                    <label>
+                        @totalVal INR
+                    </label>
+                </div>
+                <div>
+                    <span>
+
+                    </span>
+                    <span>
+                        <label>
+                            VAT
+                        </label>
+
+                        <label>
+                            @Model.VatApplied
+                        </label>
+                    </span>
+                </div>
+                <hr />
+                <div>
+                    <label>
+                        GrandTotal
+                    </label>
+                    <label>
+                        @Model.InvoiceTotal INR
+                    </label>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-primary" id="modalCancel" style="align-content:flex-start; float:left" value="Cancel">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#modalCancel").on("click", function () {
+            //Clear all
+            $("#leftViewExistingData").find("tr").not(":first").remove();
+            $("#leftViewDefaultData").show();
+
+            $(".calFinal").each((i,e) => {
+
+                $(e).val($(e)[0].defaultValue);
+            });
+             $(".ftt").each((i,e) => {       
+                $(e).text(null);
+            });
+
+            $("#modalDiv").hide();
+
+        })
+
+
+    });
+
+</script>

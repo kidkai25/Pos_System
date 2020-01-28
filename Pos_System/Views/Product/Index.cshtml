@@ -1,0 +1,30 @@
+﻿@model Pos_System.ViewModel.BaseViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Product Items Index Page</h2>
+
+@*@ViewBag.Sales
+@ViewBag.Category
+@ViewBag.Product
+@ViewBag.Product2*@
+
+<div>
+    <!--Going to add 2 partial View-->
+
+    <div class="col-md-6">
+        @{ Html.RenderAction("LeftView", Model.SubViewModel1);}
+    </div>
+    <div class="col-md-6">
+        @{ Html.RenderAction("RightView", Model.SubViewModel2);}
+    </div>
+
+
+    <div id="modalDiv" style="display:none">
+
+    </div>
+
+
+
+
