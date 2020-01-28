@@ -12,6 +12,12 @@ namespace Pos_System
     {
         private ProductsDbContext pdb = new ProductsDbContext();
 
+        public PosRepository()
+        {
+            if(pdb == null)
+            pdb = new ProductsDbContext();
+        }
+
 
         public Sale GetSale(int id)
         {
@@ -37,6 +43,11 @@ namespace Pos_System
         public IEnumerable<Product> GetProductsList()
         {
             return pdb.Products.ToList();
+        }
+
+        public IQueryable<Product> GetProductsListBySale(int saleId)
+        {
+            return pdb.Products.Where(p => p.SalesId == saleId);
         }
 
         public IQueryable<Product> MaxPriceProduct()
@@ -67,6 +78,12 @@ namespace Pos_System
         public void Save()
         {
             pdb.SaveChanges();
+          
+        }
+
+        public void Dispose()
+        {
+            pdb.Dispose();
         }
 
         public void AttachProduct(Product p)

@@ -1,5 +1,5 @@
 ﻿
-<h1>Left View</h1>
+
 <div id="leftViewData">
     <table id="leftViewExistingData" style="width:100%">
         <tr>
@@ -28,10 +28,10 @@
                 Subtotal
             </td>
             <td>
-                <span id="fsubTotal">
+                <span class="ftt" id="fsubTotal">
 
                 </span>
-                
+
             </td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
                 VAT Tax
             </td>
             <td id="vatVal">
-                <input  class="calFinal" id="vatValInput" type="text" value="#N/A">                             
+                <input class="calFinal" id="vatValInput" type="text" value="#N/A">
             </td>
         </tr>
         <tr>
@@ -48,24 +48,73 @@
             </td>
             <td id="discountVal">
                 <input class="calFinal" id="discountValInput" type="text" value="0">
-               %
+                %
             </td>
         </tr>
         <tr>
-            <td >
+            <td>
                 Total
             </td>
-            <td id="finalTotal">
-               
+            <td class="ftt" id="finalTotal">
             </td>
         </tr>
     </table>
 </div>
 
 <div class="btnContainer">
-    <button id="cancelSale">Cancel Sale</button>
-    <button id="processSale">Process Sale</button>
+    <button id="cancelSale" class="btn btn-danger">Cancel Sale</button>
+    <button id="processSale" class="btn btn-success">Process Sale</button>
 </div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="CancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Are you Sure?</h2>
+
+                <p>You will not be able to recover data later</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-danger" id="CancelAccept">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CancelConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Erased</h2>
+
+                <p>Data deleted</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -74,6 +123,27 @@
 
 
     $(document).ready(function () {
+    
+
+        $(document).on('click', '#cancelSale', function () {
+            $("#CancelModal").modal('show');
+        });
+
+
+        $(document).on('click', '#CancelAccept', function () {
+            $("#CancelConfirm").modal('show');
+            //Reset Data
+              $("#leftViewExistingData").find("tr").not(":first").remove();
+            $("#leftViewDefaultData").show();
+
+            $(".calFinal").each((i,e) => {
+
+                $(e).val($(e)[0].defaultValue);
+            });
+             $(".ftt").each((i,e) => {       
+                $(e).text(null);
+            });
+        });
 
 
         $(document).on('click', '.xx', function () {
@@ -81,7 +151,7 @@
             //alert('Clicked');
         });
         $(document).on('click', '.plus', function () {
-            debugger;
+
             var spanSibling = $(this).siblings("span");
             var result = parseInt(spanSibling.text()) + 1;
             spanSibling.text(result);
@@ -98,15 +168,15 @@
             var spanSibling = $(this).siblings("span");
 
 
-            if (parseInt(spanSibling.text()) > 0){ 
+            if (parseInt(spanSibling.text()) > 0) {
                 var result = parseInt(spanSibling.text()) - 1;
-          
+
                 if (result == 0) {
-                  
+
                     alert("Please select atleast one Product");
                 }
                 else
-                spanSibling.text(result);
+                    spanSibling.text(result);
             }
 
             //CALL UPDATE
@@ -116,7 +186,7 @@
         });
 
 
-        
+
 
 
         $("#leftViewData").on("drop", function (e) {
@@ -127,10 +197,10 @@
             addProduct(data);
 
             //$("#leftViewDefaultData").html(data);
-            
+
         });
         $("#leftViewData").on("dragover", function (e) {
-            e.preventDefault();           
+            e.preventDefault();
         });
 
         function addProduct(product) {
@@ -150,13 +220,13 @@
         }
 
         function getExistingData(product) {
-            debugger;
+          
 
             var existing = $("#leftViewExistingData tr").not(':first').length > 0;
 
             if (!existing) {
                 //$("#leftViewData").html("<h1>No data to Display</h1>");
-                
+
                 $("leftViewDefaultData").show();
                 return false;
             }
@@ -174,7 +244,7 @@
 
                 if (arr.length >= 1) {
                     //Check
-                    debugger;
+                    
                     var productName = currentProduct.productName;
 
                     for (var i = 0; i < arr.length; i++) {
@@ -191,7 +261,7 @@
                 else
                     return productExists
 
-               
+
             }
 
 
@@ -199,20 +269,20 @@
 
         function createNewProductRow(product) {
             var newProduct = JSON.parse(product);
-            debugger;
+          
             //Extract data
             var productId = newProduct.productId;
             var productName = newProduct.productName;
             var productPrice = newProduct.productPrice;
 
-           
+
 
             //New Row
             $("#leftViewExistingData tr:last").after(
                 "<tr id=productRow_" + productId + " class=cartProduct><td id=productName_" + productId +
-                ">" + "<button class=xx id = cross_" + productId + "> Cross </button><span id=productNameVal_" + productId + ">" + productName + "</span></td><td id=productPrice_" + productId + ">" + productPrice +
+                ">" + "<button class='xx btn btn-default btn-sm' id = cross_" + productId + "><span class='glyphicon glyphicon-remove-circle'></span> </button><span id=productNameVal_" + productId + ">" + productName + "</span></td><td id=productPrice_" + productId + ">" + productPrice +
                 "</td><td id=productQuantity_" + productId +
-                "><button class=plus id=plus_" + productId + ">plus</button><span id=qNumber_" + productId + ">1</span><button class=minus id=minus_" + productId + ">minus</button</td><td class=subTotal id= productTotalPrice_" + productId + ">" + productPrice + "</td></tr>"
+                "><button class='btn btn-default btn-sm plus'  id=plus_" + productId + "><span class='glyphicon glyphicon-plus-sign'></span>plus</button><span id=qNumber_" + productId + ">1</span><button class='minus btn btn-default btn-sm' id=minus_" + productId + "><span class='glyphicon glyphicon-minus-sign'></span>minus</button</td><td class=subTotal id= productTotalPrice_" + productId + ">" + productPrice + "</td></tr>"
             )
 
             $("#leftViewExistingData").show();
@@ -223,7 +293,7 @@
 
             //parse back to JSON object
             var newProduct = JSON.parse(product);
-            debugger;
+         
             //Extract data
             var productId = newProduct.productId;
             var productName = newProduct.productName;
@@ -241,13 +311,12 @@
             var result = parseInt(currentRowTotal) + parseInt(productPrice);
             currentRow.find("#productTotalPrice_" + productId).text(result);
 
-       
-          
+
+
         }
 
 
-        function updateTotal(e)
-        {      
+        function updateTotal(e) {
             var pid = e.attr("id").split('_')[1];
             console.log(pid);
             var totalElement = $(e).find("#productTotalPrice_" + pid);
@@ -256,7 +325,7 @@
             var updatedTotalPrice = parseInt(unitPrice) * parseInt(quantity);
             totalElement.text(updatedTotalPrice);
 
-           
+
 
         }
 
@@ -265,7 +334,7 @@
         //#summary table functions//
 
         $(document).on('click', '#processSale', function () {
-            debugger;
+          
             var vatVal = $("#vatValInput").val();
 
             if (isNaN(vatVal))
@@ -277,60 +346,60 @@
                 //My Object
                 //
 
-             var obj =   {
-                        //"$id": "1",
-                        "Products": [
-                            {
-                                "$id": "2",
-                                "ProductId": 3,
-                                "Name": "First Product",
-                                "UnitPrice": 500,
-                                "AvailableQuantity": null,
-                                "Image": null,
-                                "CategoryId": 1,
-                                "Category": null,
-                                
-                            },
-                            {
-                                "$id": "3",
-                                "ProductId": 4,
-                                "Name": "Second Product",
-                                "UnitPrice": 10000,
-                                "AvailableQuantity": null,
-                                "Image": null,
-                                "CategoryId": 2,
-                                "Category": null,
-                               
-                            },
-                            {
-                                "$id": "4",
-                                "ProductId": 5,
-                                "Name": "Third Product",
-                                "UnitPrice": 200000,
-                                "AvailableQuantity": null,
-                                "Image": null,
-                                "CategoryId": 2,
-                                "Category": null,
-                                
-                            },
-                            {
-                                "$id": "5",
-                                "ProductId": 6,
-                                "Name": "Fourth Product",
-                                "UnitPrice": 300,
-                                "AvailableQuantity": null,
-                                "Image": null,
-                                "CategoryId": 2,
-                                "Category": null,
-                               
-                            }
-                        ],
-                          
-                                "EmployeeID": 1,
-                                    "DateOfSale": "2020-01-27T17:31:41.927",
-                                        "AnyDiscount": true,
-                                            "VatApplied": 10.00,
-                                                "InvoiceTotal": 1000.00
+                var obj = {
+                    //"$id": "1",
+                    "Products": [
+                        {
+                            "$id": "2",
+                            "ProductId": 3,
+                            "Name": "First Product",
+                            "UnitPrice": 500,
+                            "AvailableQuantity": null,
+                            "Image": null,
+                            "CategoryId": 1,
+                            "Category": null,
+
+                        },
+                        {
+                            "$id": "3",
+                            "ProductId": 4,
+                            "Name": "Second Product",
+                            "UnitPrice": 10000,
+                            "AvailableQuantity": null,
+                            "Image": null,
+                            "CategoryId": 2,
+                            "Category": null,
+
+                        },
+                        {
+                            "$id": "4",
+                            "ProductId": 5,
+                            "Name": "Third Product",
+                            "UnitPrice": 200000,
+                            "AvailableQuantity": null,
+                            "Image": null,
+                            "CategoryId": 2,
+                            "Category": null,
+
+                        },
+                        {
+                            "$id": "5",
+                            "ProductId": 6,
+                            "Name": "Fourth Product",
+                            "UnitPrice": 300,
+                            "AvailableQuantity": null,
+                            "Image": null,
+                            "CategoryId": 2,
+                            "Category": null,
+
+                        }
+                    ],
+
+                    "EmployeeID": 1,
+                    "DateOfSale": "2020-01-27T17:31:41.927",
+                    "AnyDiscount": true,
+                    "VatApplied": 10.00,
+                    "InvoiceTotal": 1000.00
                 }
 
 
@@ -348,7 +417,7 @@
 
                 };
 
-                debugger;
+             
 
                 //Putting Values
                 saleObj.AnyDiscount = ($("#discountValInput").val() != 0) ? true : false;
@@ -360,10 +429,10 @@
                 //Function to get All Products added to cart
 
 
-                $(".cartProduct").each((i,e) => {
+                $(".cartProduct").each((i, e) => {
 
                     var product = {};
-                    debugger;
+                    
                     product.ProductId = $(e).attr("id").split('_')[1];
                     product.Name = $(e).find("#productName_" + product.ProductId + " span").text();
                     product.currentQuantity = $(e).find("#productQuantity_" + product.ProductId + " span").text();
@@ -371,7 +440,7 @@
                     saleObj.Products.push(product);
                 });
 
-                
+
 
 
 
@@ -389,25 +458,31 @@
                 //}
 
 
-                
-                    $.ajax({
-                        url: "Product/ReceiveSale",
-                        type:"POST",
-                        dataType: "json",
-                        data: JSON.stringify({ 'sale': saleObj }), 
-                        contentType: "application/json; charset=utf-8",
-                        success: function (result) {                      
-                            alert("SUCCESS");
 
-                            $('#ModalPopUp').modal('show');
-                        },
+                $.ajax({
+                    url: "Product/ReceiveSale",
+                    type: "POST",
+                    dataType: "html",
+                    data: JSON.stringify({ 'sale': saleObj }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                     
+                        //alert("SUCCESS");
+                        debugger;
 
-                        error: function (res) {
-                            alert("FAILED");
-                            $('#ModalPopUp').modal('show');
-                        }
-                    })
-               
+                        $("#modalDiv").html(result);
+                        $("#modalDiv").show();
+                   
+
+                        $('#ModalPopUp').modal('show');
+                    },
+
+                    error: function (res) {
+                        alert("FAILED");
+                        $('#ModalPopUp').modal('show');
+                    }
+                })
+
 
 
 
@@ -423,13 +498,13 @@
             var cur = 0;
             $(".subTotal").each(function (i, e) {
 
-                debugger;
+               
                 console.log($(e));
                 cur += parseInt($(e).text());
                 //
             });
 
-            debugger;
+          
             $("#fsubTotal").text(cur);
 
 
@@ -440,7 +515,7 @@
 
         function calTotal() {
             //Get discount,subtotal and vat
-            debugger;
+         
             var discount = parseInt($("#discountValInput").val());
             var currentVat = $("#vatValInput").val();
             var vat = isNaN(currentVat) ? 0 : parseInt(currentVat);
@@ -452,12 +527,12 @@
         }
 
         $(document).on("change", ".calFinal", function () {
-            debugger;
+           
             $("#finalTotal").text(calTotal())
-          
+
         })
-      
-       
+
+
     })
 
 

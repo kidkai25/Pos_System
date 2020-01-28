@@ -41,7 +41,7 @@ namespace Pos_System
                 Product product = new Product
                 {
                     ProductId = 1,
-                    Name = "First Product",
+                    Name = "computer",
                     CategoryId = categories[0].CategoryId,
                     UnitPrice = 500
                     //SalesId = s.SaleId
@@ -50,9 +50,9 @@ namespace Pos_System
             Product product2 = new Product
             {
                 ProductId = 2,
-                Name = "Second Product",
-                CategoryId = categories[1].CategoryId,
-                UnitPrice = 10000
+                Name = "mouse",
+                CategoryId = categories[0].CategoryId,
+                UnitPrice = 10000,
                     //SalesId = s.SaleId
                 };
 
@@ -60,8 +60,8 @@ namespace Pos_System
         Product product3 = new Product
         {
             ProductId = 3,
-            Name = "Third Product",
-            CategoryId = categories[1].CategoryId,
+            Name = "keyboard",
+            CategoryId = categories[0].CategoryId,
             UnitPrice = 200000
                 //SalesId = s.SaleId
             };
@@ -69,8 +69,8 @@ namespace Pos_System
             Product product4 = new Product
             {
                 ProductId = 4,
-                Name = "Fourth Product",
-                CategoryId = categories[1].CategoryId,
+                Name = "motherboard",
+                CategoryId = categories[0].CategoryId,
                 UnitPrice = 300
                 //SalesId = s.SaleId
             };
@@ -78,7 +78,7 @@ namespace Pos_System
             Product product5 = new Product
             {
                 ProductId = 5,
-                Name = "Fifth Product",
+                Name = "grapes",
                 CategoryId = categories[1].CategoryId,
                 //SalesId = s.SaleId
                 UnitPrice = 600
@@ -87,8 +87,40 @@ namespace Pos_System
             Product product6 = new Product
             {
                 ProductId = 6,
-                Name = "Sixth Product",
+                Name = "kiwi",
                 CategoryId = categories[1].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 3300
+            };
+            Product product7 = new Product
+            {
+                ProductId = 7,
+                Name = "strawberries",
+                CategoryId = categories[1].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 3300
+            };
+            Product product8 = new Product
+            {
+                ProductId = 8,
+                Name = "clothing",
+                CategoryId = categories[2].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 3300
+            };
+            Product product9 = new Product
+            {
+                ProductId = 9,
+                Name = "gift_folding",
+                CategoryId = categories[2].CategoryId,
+                //SalesId = s.SaleId
+                UnitPrice = 3300
+            };
+            Product product10 = new Product
+            {
+                ProductId = 10,
+                Name = "jacket",
+                CategoryId = categories[2].CategoryId,
                 //SalesId = s.SaleId
                 UnitPrice = 3300
             };
@@ -100,6 +132,10 @@ namespace Pos_System
             psdbcontext.Products.Add(product4);
             psdbcontext.Products.Add(product5);
             psdbcontext.Products.Add(product6);
+            psdbcontext.Products.Add(product7);
+            psdbcontext.Products.Add(product8);
+            psdbcontext.Products.Add(product9);
+            psdbcontext.Products.Add(product10);
 
 
 
@@ -125,7 +161,7 @@ namespace Pos_System
             //psdbcontext.Sales.Add(s);
 
 
-                psdbcontext.SaveChanges();
+            psdbcontext.SaveChanges();
 
 
                 base.Seed(psdbcontext);

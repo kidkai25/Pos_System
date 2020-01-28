@@ -41,11 +41,21 @@ namespace Pos_System.Controllers
                 var authManager = context.Authentication;
                 authManager.SignIn(identity);
 
-                 Url.Action("Index", "Product");
+                 return RedirectToAction("Index", "Product");
+
             }
 
 
             return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+
+            authManager.SignOut("ApplicationCookie");
+            return RedirectToAction("Login", "Auth");
         }
     }
 

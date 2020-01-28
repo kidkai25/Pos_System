@@ -3,6 +3,7 @@ using Pos_System.Models;
 using Pos_System.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +20,25 @@ namespace Pos_System.Controllers
             try
             {
                 var posRepostiory = new PosRepository();
-              
+
+
+                //Set 
+
+                var products = posRepostiory.GetProductsList();
+
+                //Storing respective images paths in ViewData
+
+                foreach (var product in products)
+                {
+                  
+                    var productName = product.Name;
+                    
+                    Session[productName] = "/Content/Images/" + productName + ".jpg";
+
+                }
+
+                var xx = 0;
+
                 //Checking Data: a Sample Data to check ef
                 var c = posRepostiory.GetCategory(1);
                 //var s = posRepostiory.GetSale(1);
@@ -60,6 +79,11 @@ namespace Pos_System.Controllers
         public ActionResult RightView(SubViewModel2 subViewModel2)
         {
 
+
+           
+
+
+
             return PartialView("_RightView", subViewModel2);
         }
 
@@ -69,6 +93,19 @@ namespace Pos_System.Controllers
 
             //Get Entire Products list
             var products = posRepostiory.GetProductsList();
+
+            ////Storing respective images paths in ViewData
+
+            //foreach(var product in products)
+            //{
+            //    var productName = product.Name;
+            //    ViewData[productName] = "~/Content/Images/" + productName + ".jpg";
+
+            //}
+
+            //var xx = 0;
+
+
 
             //Check for Category Selected
             if (CategoryId.HasValue && CategoryId != 0)
@@ -122,16 +159,27 @@ namespace Pos_System.Controllers
                 {
 
                     //Attach it. It already exists :)
+                    //won't be dirty
                     posRepostiory.AttachProduct(product);
+                    ViewData["currentQuantity_" + product.ProductId] = product.currentQuantity;
                 }
 
 
                 //Ready to save to db :)
                 posRepostiory.AddSale(sale);
 
-            var x = 0;
+            //var x = 0;
+                
 
-            posRepostiory.Save();
+                posRepostiory.Save();
+                posRepostiory.Dispose();
+
+                posRepostiory = new PosRepository();
+                
+                sale.Products = posRepostiory.GetProductsListBySale(sale.SaleId).ToList();
+                                   
+
+                var x2 = sale.Products.ToList();
             }
 
             catch(Exception ex)
@@ -143,8 +191,11 @@ namespace Pos_System.Controllers
             //    return Json("Success");
             //else
             //    return Json("An Error Has occured");
-            return Content("x");
+            return PartialView("_SummaryView", sale);
         }
+
+
+       
 
     }
 }

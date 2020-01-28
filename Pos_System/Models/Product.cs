@@ -8,7 +8,7 @@ namespace Pos_System.Models
 {
     //One Product 
     //can have one category 
-    //can have many sales
+    //sale? 
     public class Product
     {
         public int ProductId { get; set; }
